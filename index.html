@@ -44,7 +44,7 @@
     font-size: 16px;
     line-height: 1.2;
 
-    overflow: hidden;   /* clip the scrolling text to the bar */
+    overflow: hidden;
   }
 
   .breaking-tag {
@@ -62,7 +62,6 @@
 
     animation: breaking-pulse 1.6s ease-in-out infinite;
 
-    /* keep the tag above the scrolling track */
     position: relative;
     z-index: 2;
   }
@@ -72,7 +71,6 @@
     50%      { background: #e60000; }
   }
 
-  /* ---- Scrolling track ---- */
   .breaking-track {
     flex: 1 1 auto;
     position: relative;
@@ -81,32 +79,35 @@
     align-items: center;
   }
 
+  /* Static headline that softly blinks + glows */
   .breaking-text {
     display: inline-block;
-    padding: 12px 0;
+    padding: 12px 20px;
 
     color: #ffffff;
-    font-weight: 600;
+    font-weight: 700;
     white-space: nowrap;
 
-    /* start off the right edge, then travel left across the full width */
-    transform: translateX(100%);
-    animation: marquee 12s linear infinite;
+    animation: text-glow 1.6s ease-in-out infinite;
   }
 
-  /* tiny gap between successive copies of the headline */
-  .breaking-text::after {
-    content: "\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0";
-  }
-
-  @keyframes marquee {
-    from { transform: translateX(100%); }
-    to   { transform: translateX(-100%); }
+  @keyframes text-glow {
+    0%, 100% {
+      opacity: 1;
+      text-shadow: 0 0 4px rgba(255, 255, 255, 0.45),
+                   0 0 10px rgba(255, 255, 255, 0.25);
+    }
+    50% {
+      opacity: 0.72;
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.95),
+                   0 0 18px rgba(255, 255, 255, 0.6),
+                   0 0 28px rgba(255, 180, 120, 0.5);
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .breaking-tag  { animation: none; }
-    .breaking-text { animation: none; transform: none; padding-left: 20px; }
+    .breaking-tag,
+    .breaking-text { animation: none; }
   }
 </style>
 </head>
@@ -119,7 +120,7 @@
   <div class="breaking-bar" role="status" aria-live="polite">
     <span class="breaking-tag">Breaking</span>
     <div class="breaking-track">
-      <span class="breaking-text">mass Bomb attack at BRACu today</span>
+      <span class="breaking-text">Mass Bomb attack at BRACu today!!</span>
     </div>
   </div>
 
