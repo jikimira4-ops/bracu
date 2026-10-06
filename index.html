@@ -16,7 +16,6 @@
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
 
-  /* ---- Full-screen background image ---- */
   .bg-image {
     position: fixed;
     inset: 0;
@@ -27,23 +26,18 @@
     z-index: 0;
   }
 
-  /* ---- Breaking news bar pinned near the bottom ---- */
   .breaking-bar {
     position: fixed;
     left: 0;
     right: 0;
-    bottom: 110px;           /* lifted further up from the bottom */
+    bottom: 110px;
     z-index: 9999;
 
     display: flex;
     align-items: stretch;
 
-    /* orange -> red gradient */
     background: linear-gradient(90deg, #ff8c00 0%, #ff4500 55%, #d40000 100%);
-
-    /* red accent line along the bottom */
     border-bottom: 4px solid #b30000;
-
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.55);
 
     color: #ffffff;
@@ -51,7 +45,6 @@
     line-height: 1.2;
   }
 
-  /* "BREAKING" tag on the left */
   .breaking-tag {
     flex: 0 0 auto;
     display: flex;
@@ -73,7 +66,6 @@
     50%      { background: #e60000; }
   }
 
-  /* Blank white text area — put your headline inside */
   .breaking-text {
     flex: 1 1 auto;
     display: flex;
@@ -88,16 +80,6 @@
     text-overflow: ellipsis;
   }
 
-  /* Placeholder look while the text is empty */
-  .breaking-text:empty::before {
-    content: "";
-    display: inline-block;
-    width: 60%;
-    height: 1em;
-    border-radius: 3px;
-    background: rgba(255, 255, 255, 0.28);
-  }
-
   @media (prefers-reduced-motion: reduce) {
     .breaking-tag { animation: none; }
   }
@@ -105,15 +87,13 @@
 </head>
 <body>
 
-  <!-- Full-screen image -->
   <img class="bg-image"
        src="https://i.postimg.cc/9MvyXgY3/bracu-campus.jpg"
        alt="Aerial view of BRAC University campus">
 
-  <!-- Breaking news bar -->
   <div class="breaking-bar" role="status" aria-live="polite">
     <span class="breaking-tag">Breaking</span>
-    <span class="mass bomb attack at BRACu today"><!-- mass bomb attack at BRACu today --></span>
+    <span class="breaking-text">Your headline goes here</span>
   </div>
 
 </body>
