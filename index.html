@@ -43,6 +43,8 @@
     color: #ffffff;
     font-size: 16px;
     line-height: 1.2;
+
+    overflow: hidden;   /* clip the scrolling text to the bar */
   }
 
   .breaking-tag {
@@ -59,6 +61,10 @@
     white-space: nowrap;
 
     animation: breaking-pulse 1.6s ease-in-out infinite;
+
+    /* keep the tag above the scrolling track */
+    position: relative;
+    z-index: 2;
   }
 
   @keyframes breaking-pulse {
@@ -66,22 +72,41 @@
     50%      { background: #e60000; }
   }
 
-  .breaking-text {
+  /* ---- Scrolling track ---- */
+  .breaking-track {
     flex: 1 1 auto;
+    position: relative;
+    overflow: hidden;
     display: flex;
     align-items: center;
+  }
 
-    padding: 12px 20px;
+  .breaking-text {
+    display: inline-block;
+    padding: 12px 0;
+
     color: #ffffff;
     font-weight: 600;
-
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+
+    /* start off the right edge, then travel left across the full width */
+    transform: translateX(100%);
+    animation: marquee 12s linear infinite;
+  }
+
+  /* tiny gap between successive copies of the headline */
+  .breaking-text::after {
+    content: "\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0";
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(100%); }
+    to   { transform: translateX(-100%); }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .breaking-tag { animation: none; }
+    .breaking-tag  { animation: none; }
+    .breaking-text { animation: none; transform: none; padding-left: 20px; }
   }
 </style>
 </head>
@@ -93,7 +118,9 @@
 
   <div class="breaking-bar" role="status" aria-live="polite">
     <span class="breaking-tag">Breaking</span>
-    <span class="breaking-text">nonononononononononono</span>
+    <div class="breaking-track">
+      <span class="breaking-text">mass Bomb attack at BRACu today</span>
+    </div>
   </div>
 
 </body>
